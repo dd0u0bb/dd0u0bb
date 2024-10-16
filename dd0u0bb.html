@@ -1,10 +1,91 @@
 <!DOCTYPE html>
-<html>
-<head>ccccc
-<title>Page Title</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+        canvas {
+            background-color: #000; /* 背景設為黑色 */
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+    <canvas id="gameCanvas" width="400" height="400"></canvas> <!-- 400x400的遊戲畫布 -->
+    <script src="snake.js"></script> <!-- 連接到 JavaScript 文件 -->
 </body>
-</html> 
+</html>
+const canvas = document.getElementById('gameCanvas'); // 獲取畫布
+const ctx = canvas.getContext('2d'); // 獲取2D繪圖上下文
+
+const box = 20; // 每個蛇節的大小為20x20像素
+let snake = [{ x: 9 * box, y: 10 * box }]; // 蛇的初始位置
+
+let food = {
+    x: Math.floor(Math.random() * (canvas.width / box)) * box,
+    y: Math.floor(Math.random() * (canvas.height / box)) * box
+}; // 隨機生成食物位置
+let direction;
+
+document.addEventListener('keydown', event => {
+    if (event.keyCode == 37 && direction != "RIGHT") direction = "LEFT";
+    else if (event.keyCode == 38 && direction != "DOWN") direction = "UP";
+    else if (event.keyCode == 39 && direction != "LEFT") direction = "RIGHT";
+    else if (event.keyCode == 40 && direction != "UP") direction = "DOWN";
+});
+function draw() {
+    // 清空畫布
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 畫出蛇
+    for (let i = 0; i < snake.length; i++) {
+        ctx.fillStyle = i == 0 ? "#32CD32" : "#FFF"; // 蛇頭為綠色，其他部分為白色
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+    }
+
+    // 畫出食物
+    ctx.fillStyle = "#FF0000"; // 食物為紅色
+    ctx.fillRect(food.x, food.y, box, box);
+
+    // 更新蛇的頭部位置
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if (direction == "LEFT") snakeX -= box;
+    if (direction == "UP") snakeY -= box;
+    if (direction == "RIGHT") snakeX += box;
+    if (direction == "DOWN") snakeY += box;
+
+    // 如果蛇吃到了食物
+    if (snakeX == food.x && snakeY == food.y) {
+        food = {
+            x: Math.floor(Math.random() * (canvas.width / box)) * box,
+            y: Math.floor(Math.random() * (canvas.height / box)) * box
+        }; // 重新隨機生成食物
+    } else {
+        snake.pop(); // 否則移除蛇的尾巴
+    }
+
+    // 新的蛇頭
+    let newHead = { x: snakeX, y: snakeY };
+
+    // 判斷遊戲結束條件：蛇撞到牆壁或自身
+    if (snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || checkCollision(newHead, snake)) {
+        clearInterval(game); // 停止遊戲
+        alert("Game Over!");
+    }
+
+    snake.unshift(newHead); // 增加新的蛇頭
+}
+
+function checkCollision(head, snakeArray) {
+    for (let i = 1; i < snakeArray.length; i++) {
+        if (head.x == snakeArray[i].x && head.y == snakeArray[i].y) {
+            return true;
+        }
+    }
+    return false;
+}
+let game = setInterval(draw, 100);
