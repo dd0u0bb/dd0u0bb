@@ -17,3 +17,90 @@
     <script src="game.js"></script>
 </body>
 </html>
+/* 設置基本的樣式和背景 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #1e1e1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-box {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-box h1 {
+    color: #ffffff;
+    font-size: 2em;
+}
+
+.login-box p {
+    color: #cccccc;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #00b894;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+button:hover {
+    background-color: #00a882;
+}
+
+.info p {
+    margin-top: 20px;
+    color: #999999;
+}
+
+.info a {
+    color: #00b894;
+    text-decoration: none;
+}
+
+.info a:hover {
+    text-decoration: underline;
+}
+
+#status {
+    margin-top: 10px;
+    color: #ff7675;
+}
+// 連接MetaMask並顯示錢包地址
+document.getElementById('connect-wallet').addEventListener('click', async () => {
+    if (window.ethereum) {
+        try {
+            // 請求連接MetaMask錢包
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            const walletStatus = document.getElementById('wallet-status');
+            walletStatus.textContent = `Connected: ${accounts[0]}`;
+            walletStatus.style.color = "#00b894";
+        } catch (error) {
+            console.error("Error connecting to MetaMask:", error);
+            alert("Failed to connect MetaMask");
+        }
+    } else {
+        alert('MetaMask is not installed. Please install it from https://metamask.io/');
+    }
+});
