@@ -1,33 +1,37 @@
-/* 設置基本的樣式和背景 */
+/* 設置整個頁面的背景圖片，並讓圖片覆蓋整個屏幕 */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background: #1e1e1e;
+    background: url('https://your-background-image-url.com') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: white; /* 設置文字顏色為白色，與背景形成對比 */
 }
 
+/* 包裝所有內容，讓它們居中對齊 */
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+    text-align: center;
 }
 
+/* 調整登錄框的外觀 */
 .login-box {
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.7); /* 黑色透明背景，使文字更加清晰 */
     border-radius: 10px;
     padding: 40px;
     text-align: center;
     width: 350px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .login-box h1 {
-    color: #ffffff;
     font-size: 2em;
 }
 
@@ -35,6 +39,7 @@ body {
     color: #cccccc;
 }
 
+/* 調整按鈕樣式 */
 button {
     padding: 10px 20px;
     background-color: #00b894;
@@ -50,9 +55,10 @@ button:hover {
     background-color: #00a882;
 }
 
+/* 讓額外的提示信息清晰可見 */
 .info p {
     margin-top: 20px;
-    color: #999999;
+    color: #dddddd;
 }
 
 .info a {
