@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game</title>
-    <style>
-        canvas {
-            background-color: #000; /* 背景設為黑色 */
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
+    <title>NFT Game</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas id="gameCanvas" width="400" height="400"></canvas> <!-- 400x400的遊戲畫布 -->
-    <script src="snake.js"></script> <!-- 連接到 JavaScript 文件 -->
+    <h1>Welcome to the NFT Game</h1>
+    <div id="game-area">
+        <!-- 遊戲區域會在這裡渲染 -->
+    </div>
+    <button id="connect-wallet">Connect Wallet</button>
+
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
