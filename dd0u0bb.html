@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFT Game - Login</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- 引入Web3.js庫 -->
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
     <style>
-        /* 全局樣式 */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background: url('https://your-background-image-url.com') no-repeat center center fixed; /* 替換為你的背景圖片URL */
+            background: url('https://github.com/dd0u0bb/nft-game/raw/main/craftpix-net-138963-free-nature-pixel-backgrounds-for-games (1)') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -21,7 +19,6 @@
             height: 100vh;
             color: white;
         }
-
         .container {
             display: flex;
             justify-content: center;
@@ -29,7 +26,6 @@
             height: 100%;
             text-align: center;
         }
-
         .login-box {
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
@@ -38,7 +34,6 @@
             width: 350px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
-
         button {
             padding: 10px 20px;
             background-color: #00b894;
@@ -49,65 +44,31 @@
             margin-top: 20px;
             font-size: 1.2em;
         }
-
         button:hover {
             background-color: #00a882;
         }
-
         #status {
             margin-top: 10px;
             color: #ff7675;
         }
-
-        /* 遊戲畫面隱藏的樣式 */
         #game-screen {
             display: none;
             text-align: center;
             padding: 20px;
         }
-
-        #character-display {
-            margin: 20px 0;
-        }
-
         #character {
-            width: 100px; /* 可以根據需要調整大小 */
-            height: 100px; /* 可以根據需要調整大小 */
-            background: url('https://your-character-image-url.com') no-repeat center center; /* 替換為你的角色圖片URL */
+            width: 100px;
+            height: 100px;
+            background: url('https://github.com/你的用戶名/nft-game/raw/main/images/character.png') no-repeat center center;
             background-size: contain;
             margin: auto;
         }
-
-        #battle-area {
-            margin-top: 30px;
-        }
-
         #enemy {
-            width: 100px; /* 可以根據需要調整大小 */
-            height: 100px; /* 可以根據需要調整大小 */
-            background: url('https://your-enemy-image-url.com') no-repeat center center; /* 替換為敵人圖片URL */
+            width: 100px;
+            height: 100px;
+            background: url('https://github.com/你的用戶名/nft-game/raw/main/images/enemy.png') no-repeat center center;
             background-size: contain;
             margin: auto;
-        }
-
-        #attack-button {
-            padding: 10px 20px;
-            background-color: #e84393;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
-
-        #attack-button:hover {
-            background-color: #d63031;
-        }
-
-        #battle-status {
-            margin-top: 10px;
-            color: #ff7675;
         }
     </style>
 </head>
@@ -116,23 +77,15 @@
         <div class="login-box">
             <h1>NFT Game</h1>
             <p>Welcome! Please connect your wallet to continue.</p>
-            
-            <!-- 登錄狀態區域 -->
             <div id="status">
                 <p id="wallet-status">Wallet not connected</p>
             </div>
-            
-            <!-- 登錄按鈕 -->
             <button id="connect-wallet">Connect Wallet</button>
-
-            <!-- 額外提示信息 -->
             <div class="info">
                 <p>Don't have MetaMask? <a href="https://metamask.io/download.html" target="_blank">Download here</a></p>
             </div>
         </div>
     </div>
-
-    <!-- 遊戲畫面 -->
     <div id="game-screen">
         <h1>Welcome to the NFT Game!</h1>
         <div id="character-display">
@@ -146,16 +99,12 @@
             <div id="battle-status"></div>
         </div>
     </div>
-
     <script src="game.js"></script>
     <script>
-        // 連接MetaMask的代碼
         let web3;
         let contract;
-
-        // 智能合約地址和ABI
-        const contractAddress = 'YOUR_CONTRACT_ADDRESS'; // 替換為你的智能合約地址
-        const contractABI = [ /* 替換為你的合約ABI */ ];
+        const contractAddress = 'YOUR_CONTRACT_ADDRESS';
+        const contractABI = [ /* YOUR_ABI_HERE */ ];
 
         document.getElementById('connect-wallet').addEventListener('click', async () => {
             if (window.ethereum) {
@@ -164,14 +113,10 @@
                     const walletStatus = document.getElementById('wallet-status');
                     walletStatus.textContent = `Connected: ${accounts[0]}`;
                     walletStatus.style.color = "#00b894";
-
-                    // 初始化Web3和智能合約
                     web3 = new Web3(window.ethereum);
                     contract = new web3.eth.Contract(contractABI, contractAddress);
-
-                    // 顯示遊戲畫面
-                    document.querySelector('.container').style.display = 'none'; // 隱藏登錄框
-                    document.getElementById('game-screen').style.display = 'block'; // 顯示遊戲畫面
+                    document.querySelector('.container').style.display = 'none';
+                    document.getElementById('game-screen').style.display = 'block';
                 } catch (error) {
                     console.error("Error connecting to MetaMask:", error);
                     alert("Failed to connect MetaMask");
@@ -183,3 +128,4 @@
     </script>
 </body>
 </html>
+
